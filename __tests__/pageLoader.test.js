@@ -11,7 +11,7 @@ axios.defaults.adapter = httpAdapter;
 const hostName = 'https://hexlet.io';
 const fileName = 'hexlet-io-courses.html';
 const filePath = path.resolve(os.tmpdir(), fileName);
-const body = '<body><h1>This is a body of html page</h1><p>This Hexlet, bitch</p></body>';
+const body = '<body><h1>This is a body of html page</h1><p>This is mock</p></body>';
 
 beforeEach(async () => {
   nock(hostName)
