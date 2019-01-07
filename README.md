@@ -2,8 +2,11 @@
 # CLI page loader
 
 This is a CLI pageLoader.
+
 To install please write in terminal:```npm -g install hexlet-level3-ya```.
+
 To use - write in terminal ```page-loader --output [dirname] url ```.
+
 Asciinema:
 [![asciicast](https://asciinema.org/a/14.png)](https://asciinema.org/a/Xsj2vwzz9wI3b3NMfTlMXOGtf
 )
