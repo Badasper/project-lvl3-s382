@@ -4,7 +4,7 @@
   "description": "My hexlet course lvl 3. Page loader.",
   "main": "dist/index.js",
   "scripts": {
-    "test": "DEBUG=page-loader jest",
+    "test": "jest",
     "eslint": "eslint --format codeframe",
     "babel-node": "babel-node",
     "build": "NODE_ENV=production babel src --out-dir dist --source-maps inline",
@@ -22,8 +22,9 @@
   },
   "jest": {
     "testEnvironment": "node",
+    "collectCoverage": true,
     "coverageReporters": [
-      "html",
+      "json",
       "text"
     ]
   },
