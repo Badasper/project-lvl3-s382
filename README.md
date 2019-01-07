@@ -1,0 +1,3 @@
+# Page-loader -- Hexlet level 3
+
+[![Maintainability](https://api.codeclimate.com/v1/badges/3c4053febdc1a722cdb3/maintainability)](https://codeclimate.com/github/Badasper/project-lvl3-s250/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/3c4053febdc1a722cdb3/test_coverage)](https://codeclimate.com/github/Badasper/project-lvl3-s250/test_coverage) [![Build Status](https://travis-ci.org/Badasper/project-lvl3-s250.svg?branch=master)](https://travis-ci.org/Badasper/project-lvl3-s250)
