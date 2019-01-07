@@ -1,7 +1,8 @@
+import pageLoader from '../src';
 
 describe('MockTest', () => {
   it('#first', () => {
-    const data = 1;
+    const data = pageLoader(1);
     expect(data).toEqual(1);
   });
 });
