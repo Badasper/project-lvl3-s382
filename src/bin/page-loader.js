@@ -6,8 +6,8 @@ import { version } from '../../package.json';
 
 program
   .version(version, '-v, --version')
-  .description('Programm load page from url')
-  .option('-o, --output [dir]', 'Output dirname to download page')
+  .description('Programm load page from url to local file.')
+  .option('-o, --output [dir]', 'Output dirname to download page.')
   .arguments('<url>')
   .action(url => pageLoader(url, program.output))
   .parse(process.argv);

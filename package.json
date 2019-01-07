@@ -1,7 +1,7 @@
 {
   "name": "hexlet-level3-ya",
-  "version": "0.1.3",
-  "description": "Yakovlev Alexander, hexlet course level 3. Page loader.",
+  "version": "0.1.4",
+  "description": "Yakovlev Alexander, hexlet course level 3. CLI Page loader.",
   "main": "dist/index.js",
   "scripts": {
     "test": "jest",
@@ -37,9 +37,11 @@
     "eslint-plugin-import": "*",
     "eslint-plugin-jest": "*",
     "jest": "*",
-    "jest-cli": "*"
+    "jest-cli": "*",
+    "nock": "*"
   },
   "dependencies": {
-    "commander": "*"
+    "commander": "*",
+    "axios": "*"
   }
 }
