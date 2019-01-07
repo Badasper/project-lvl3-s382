@@ -1,7 +1,7 @@
 {
   "name": "hexlet-level3-ya",
-  "version": "0.1.0",
-  "description": "My hexlet course lvl 3. Page loader.",
+  "version": "0.1.3",
+  "description": "Yakovlev Alexander, hexlet course level 3. Page loader.",
   "main": "dist/index.js",
   "scripts": {
     "test": "jest",
@@ -11,7 +11,7 @@
     "prepublishOnly": "npm run build"
   },
   "bin": {
-    "page-loader": "dist/bin/page-loader"
+    "page-loader": "dist/bin/page-loader.js"
   },
   "files": [
     "dist"
@@ -26,15 +26,15 @@
   },
   "homepage": "https://github.com/Badasper/project-lvl3-s382/issues",
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.0",
-    "babel-eslint": "^8.0.2",
+    "babel-cli": "*",
+    "babel-core": "*",
+    "babel-eslint": "*",
     "babel-jest": "*",
-    "babel-preset-env": "^1.6.1",
-    "babel-preset-stage-0": "^6.24.1",
-    "eslint": "^4.13.1",
-    "eslint-config-airbnb-base": "^12.1.0",
-    "eslint-plugin-import": "^2.8.0",
+    "babel-preset-env": "*",
+    "babel-preset-stage-0": "*",
+    "eslint": "*",
+    "eslint-config-airbnb-base": "*",
+    "eslint-plugin-import": "*",
     "eslint-plugin-jest": "*",
     "jest": "*",
     "jest-cli": "*"
