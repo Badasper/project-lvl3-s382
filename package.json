@@ -22,16 +22,20 @@
   },
   "jest": {
     "testEnvironment": "node",
-    "collectCoverage": true
+    "collectCoverage": true,
+    "testPathIgnorePatterns": [
+      "/__fixtures__/"
+    ]
   },
   "homepage": "https://github.com/Badasper/project-lvl3-s382/issues",
   "devDependencies": {
-    "babel-cli": "*",
+    "@babel/cli": "*",
+    "@babel/core": "*",
+    "@babel/node": "*",
+    "@babel/preset-env": "*",
     "babel-core": "*",
     "babel-eslint": "*",
     "babel-jest": "*",
-    "babel-preset-env": "*",
-    "babel-preset-stage-0": "*",
     "eslint": "*",
     "eslint-config-airbnb-base": "*",
     "eslint-plugin-import": "*",
@@ -42,6 +46,8 @@
   },
   "dependencies": {
     "commander": "*",
-    "axios": "*"
+    "axios": "*",
+    "lodash": "*",
+    "cheerio": "*"
   }
 }
