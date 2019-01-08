@@ -41,12 +41,11 @@ const getLinksAndModifiedHtml = (data, assetsDirName) => {
   return { links, html: $.html() };
 };
 
-const downloadAssets = (links, host, assetsDirPath) =>
-  Promise.all(links.map((link) => {
-    const filename = generateName(link);
-    return getDataFromPage(`https://${host}/${link}`)
-      .then(data => fs.writeFile(resolve(assetsDirPath, filename), data));
-  }));
+const downloadAssets = (links, host, assetsDirPath) => Promise.all(links.map((link) => {
+  const filename = generateName(link);
+  return getDataFromPage(`https://${host}/${link}`)
+    .then(data => fs.writeFile(resolve(assetsDirPath, filename), data));
+}));
 
 const loadPage = (url, dirName) => {
   const { hostname, path } = parseUrl(url);
