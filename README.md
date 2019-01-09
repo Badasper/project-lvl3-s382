@@ -17,7 +17,7 @@ git clone https://github.com/Badasper/project-lvl3-s382 .
 make install
 npm link
 ```
----
+
 ## How to use
 To use please write in terminal:
 ```
@@ -27,7 +27,7 @@ example:
 ```
 page-loader --output /home/download/web https://hexlet.io/courses
 ```
----
-###Asciinema:
+
+### Asciinema:
 [demo asciinema](https://asciinema.org/a/Xsj2vwzz9wI3b3NMfTlMXOGtf
 )
