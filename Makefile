@@ -11,7 +11,7 @@ lint:
 	npx eslint .
 
 test:
-	DEBUG=worker* npm test -- --coverage
+	npm test -- --coverage
 
 debug:
 	DEBUG=page-loader* npm test -- --coverage
