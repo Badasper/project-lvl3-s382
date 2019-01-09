@@ -59,25 +59,42 @@ const saveHtmlAndPushLinks = (htmlFilePath, html, links) => fs.writeFile(htmlFil
 
 const downloadAssets = (links, host, assetsDirPath) => Promise.all(links.map((link) => {
   const filename = generateName(link);
-  return getDataFromPage(`https://${host}/${link}`)
+  return getDataFromPage(`${host}/${link}`)
     .then(data => fs.writeFile(resolve(assetsDirPath, filename), data)
       .then(() => log.files('save file %s', resolve(assetsDirPath, filename))));
 }));
 
-const loadPage = (url, dirName) => {
-  const { hostname, path } = parseUrl(url);
+const handleInputArgs = (url, dirName) => {
+  const { hostname, path, protocol } = parseUrl(url);
   const pathName = `${hostname}${path}`;
-  const dir = dirName || os.tmpdir();
+  const rootDir = dirName || os.tmpdir();
   const indexFileName = generateName(pathName, '.html');
   log.info('generate name for html file=%s', indexFileName);
   const assetsDir = generateName(pathName, '_files');
   log.info('generate name for assets dir=%s', assetsDir);
-  const assetsDirPath = resolve(dir, assetsDir);
+  return {
+    host: `${protocol}//${hostname}`,
+    indexFileName,
+    rootDir,
+    assetsDir,
+    assetsDirPath: resolve(rootDir, assetsDir),
+  };
+};
+
+const loadPage = (url, dirName) => {
+  const {
+    rootDir,
+    indexFileName,
+    assetsDir,
+    assetsDirPath,
+    host,
+  } = handleInputArgs(url, dirName);
+
   return fs.mkdir(assetsDirPath)
     .then(() => getDataFromPage(url))
     .then(data => getLinksAndModifyHtml(data, assetsDir))
-    .then(({ links, html }) => saveHtmlAndPushLinks(resolve(dir, indexFileName), html, links))
-    .then(links => downloadAssets(links, hostname, assetsDirPath))
+    .then(({ links, html }) => saveHtmlAndPushLinks(resolve(rootDir, indexFileName), html, links))
+    .then(links => downloadAssets(links, host, assetsDirPath))
     .then(() => log.info('All files downlad succsessfull!'));
 };
 
