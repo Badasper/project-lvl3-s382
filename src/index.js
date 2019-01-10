@@ -17,7 +17,7 @@ const log = {
 const generateName = (pathName, end, template = /[^\w]|[_]/gi) => {
   const { dir, name, ext } = parse(_.trim(pathName, '/'));
   const trimmedPathName = join(dir, name);
-  const extention = ext || end || '';
+  const extention = end || ext || '';
   return `${trimmedPathName.replace(template, '-')}${extention}`;
 };
 

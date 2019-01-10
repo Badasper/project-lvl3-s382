@@ -7,6 +7,9 @@ start:
 publish:
 	npm publish
 
+build:
+	
+
 lint:
 	npx eslint .
 

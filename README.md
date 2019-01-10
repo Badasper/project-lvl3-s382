@@ -2,7 +2,7 @@
 # Page loader
 
 ## Description
-This a cli tool to download web pages with assets to local directory.
+This is a CLI tool to download web pages with assets to local directory.
 
 ## How to install
 To install please write in terminal:
@@ -27,7 +27,13 @@ example:
 ```
 page-loader --output /home/download/web https://hexlet.io/courses
 ```
+DEBUG mode:
+```
+DEBUG=page-loader* --output /home/download/web https://hexlet.io/courses
+```
 
 ### Asciinema:
-[demo asciinema](https://asciinema.org/a/Xsj2vwzz9wI3b3NMfTlMXOGtf
+[demo install page-loader](https://asciinema.org/a/Xsj2vwzz9wI3b3NMfTlMXOGtf
 )
+
+[demo debug mode page-loader](https://asciinema.org/a/uggecbaRi9aqqmXmh0EmcqmWf)

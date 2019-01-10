@@ -43,7 +43,7 @@
     "eslint-plugin-jest": "*",
     "jest": "*",
     "jest-cli": "*",
-    "nock": "*"    
+    "nock": "*"
   },
   "dependencies": {
     "commander": "*",
