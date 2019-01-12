@@ -1,6 +1,6 @@
 {
   "name": "hexlet-level3-ya",
-  "version": "0.1.4",
+  "version": "0.2.2",
   "description": "Yakovlev Alexander, hexlet course level 3. CLI Page loader.",
   "main": "dist/index.js",
   "scripts": {

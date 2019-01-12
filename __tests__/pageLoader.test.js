@@ -10,8 +10,8 @@ axios.defaults.adapter = httpAdapter;
 
 nock.disableNetConnect();
 const host = 'https://hexlet.io';
-
 const pagePath = '/courses';
+const pageUrl = `${host}${pagePath}`;
 const cssPath = '/assets/css/main.css';
 const imgPath = '/assets/img/potato_fest.jpg';
 const jsPath = '/assets/js/main.js';
@@ -55,20 +55,24 @@ beforeEach(() => {
   nock(host)
     .get(jsPath)
     .reply(200, pageJs);
+
+  nock(host)
+    .get('/badlink')
+    .reply(404);
 });
 
 describe('Read data from nock server', () => {
   it('#Read raw body', async () => {
     const outDirName = await fs.mkdtemp(path.join(os.tmpdir(), 'page-hexlet-'));
     const indexFilePath = path.resolve(outDirName, 'hexlet-io-courses.html');
-    await loadPage(`${host}${pagePath}`, outDirName);
+    await loadPage(pageUrl, outDirName);
     const data = await fs.readFile(indexFilePath, 'utf-8');
     expect(data).toBe(pageBodyLocal);
   });
 
   it('#Read assets img/css/js', async () => {
     const outDirName = await fs.mkdtemp(path.join(os.tmpdir(), 'page-hexlet-2-'));
-    await loadPage(`${host}${pagePath}`, outDirName);
+    await loadPage(pageUrl, outDirName);
     const assetsDir = 'hexlet-io-courses_files';
 
     const imgFilePath = path.resolve(outDirName, assetsDir, 'assets-img-potato-fest.jpg');
@@ -82,5 +86,24 @@ describe('Read data from nock server', () => {
     const jsFilePath = path.resolve(outDirName, assetsDir, 'assets-js-main.js');
     const js = await fs.readFile(jsFilePath, 'utf-8');
     expect(js).toBe(pageJs);
+  });
+});
+
+describe('Disk operations errors', () => {
+  it('#Undefined output directory', async () => {
+    await expect(loadPage(pageUrl, '/undefined')).rejects.toThrowErrorMatchingSnapshot();
+  });
+  it('#Permission denied', async () => {
+    await expect(loadPage(pageUrl, '/root')).rejects.toThrowErrorMatchingSnapshot();
+  });
+});
+
+describe('Http errors', () => {
+  it('#Bad url', async () => {
+    await expect(loadPage('/undefined')).rejects.toThrowErrorMatchingSnapshot();
+  });
+
+  it('#404 response', async () => {
+    await expect(loadPage('https://hexlet.io/badlink')).rejects.toThrowErrorMatchingSnapshot();
   });
 });

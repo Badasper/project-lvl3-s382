@@ -37,3 +37,5 @@ DEBUG=page-loader* --output /home/download/web https://hexlet.io/courses
 )
 
 [demo debug mode page-loader](https://asciinema.org/a/uggecbaRi9aqqmXmh0EmcqmWf)
+
+[demo error handler page-loader]( https://asciinema.org/a/XulYaWoWFsKfxODNLfXBvWotW)

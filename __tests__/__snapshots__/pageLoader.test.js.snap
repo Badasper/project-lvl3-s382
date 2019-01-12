@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Disk operations errors #Permission denied 1`] = `"Loading fail: Permission denied to download dir, please choose another dir"`;
+
+exports[`Disk operations errors #Undefined output directory 1`] = `"Loading fail: Cannot find output dir, please check output dir --output dirToDownload"`;
+
+exports[`Http errors #404 response 1`] = `"Loading fail: Unreachable url 404"`;
+
+exports[`Http errors #Bad url 1`] = `"Loading fail: Bad url for download"`;
