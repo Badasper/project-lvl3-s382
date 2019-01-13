@@ -105,7 +105,7 @@ const handleInputArgs = (pageUrl = '', dirName = '') => {
   };
 };
 
-const nahdleAndThrowError = (err) => {
+const handleAndThrowError = (err) => {
   const errors = {
     EEXIST: 'Web page is already downloaded, please choose another dir',
     ENOENT: 'Cannot find output dir, please check output dir --output dirToDownload',
@@ -139,7 +139,7 @@ const loadPage = (pageUrl, dirName) => {
     .then(links => downloadAssets(links, host, assetsDirPath))
     .then(() => log.info('All files downloded succsessfully!'))
     .then(() => `Download is done ${pageUrl} to ${rootDir}`)
-    .catch(err => nahdleAndThrowError(err));
+    .catch(err => handleAndThrowError(err));
 };
 
 export default loadPage;
