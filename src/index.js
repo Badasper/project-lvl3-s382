@@ -6,6 +6,7 @@ import path from 'path';
 import url from 'url';
 import axios from 'axios';
 import debug from 'debug';
+import Listr from 'listr';
 
 const logName = 'page-loader:';
 const log = {
@@ -55,18 +56,33 @@ const getLinksAndModifyHtml = (data, assetsDirName) => {
   return { links, html: $.html() };
 };
 
-const saveHtmlAndPushLinks = (htmlFilePath, html, links) => fs.writeFile(htmlFilePath, html, 'utf-8')
-  .then(() => log.files('save html %s', htmlFilePath))
-  .then(() => links);
+const taskRunner = (taskList) => {
+  const tasks = new Listr(taskList, { concurrent: true });
+  return tasks.run();
+};
 
-const downloadAssets = (links, host, assetsDirPath) => fs.mkdir(assetsDirPath)
-  .then(() => Promise.all(links.map((link) => {
-    const filename = generateName(link);
-    const downloadLink = isCdnLink(link) ? link : url.resolve(host, link);
-    return getDataFromUrl(downloadLink)
-      .then(data => fs.writeFile(path.resolve(assetsDirPath, filename), data)
-        .then(() => log.files('save file %s', path.resolve(assetsDirPath, filename))));
-  })));
+const saveHtmlAndPushLinks = (htmlFilePath, html, links) => {
+  const promise = fs.writeFile(htmlFilePath, html, 'utf-8');
+  return taskRunner([{ title: `save html: ${htmlFilePath}`, task: () => promise }])
+    .then(() => log.files('save html %s', htmlFilePath))
+    .then(() => links);
+};
+
+const downloadAssets = (links, host, assetsDirPath) => {
+  const promise = fs.mkdir(assetsDirPath);
+  return taskRunner([{ title: `mkdir: ${assetsDirPath}`, task: () => promise }])
+    .then(() => {
+      const taskList = links.map((link) => {
+        const filename = generateName(link);
+        const downloadLink = isCdnLink(link) ? link : url.resolve(host, link);
+        const task = getDataFromUrl(downloadLink)
+          .then(data => fs.writeFile(path.resolve(assetsDirPath, filename), data)
+            .then(() => log.files('save file %s', path.resolve(assetsDirPath, filename))));
+        return { title: `download file: ${downloadLink}`, task: () => task };
+      });
+      return taskRunner(taskList);
+    });
+};
 
 const handleInputArgs = (pageUrl = '', dirName = '') => {
   const { hostname, pathname, protocol } = url.parse(pageUrl);
@@ -89,7 +105,7 @@ const handleInputArgs = (pageUrl = '', dirName = '') => {
   };
 };
 
-const handleError = (err) => {
+const nahdleAndThrowError = (err) => {
   const errors = {
     EEXIST: 'Web page is already downloaded, please choose another dir',
     ENOENT: 'Cannot find output dir, please check output dir --output dirToDownload',
@@ -102,7 +118,7 @@ const handleError = (err) => {
     throw new Error(`Loading fail: ${result}`);
   }
   if (err.response) {
-    throw new Error(`Loading fail: Unreachable url ${err.response.status}`);
+    throw new Error(`Loading fail: Unreachable url: ${err.response.status}`);
   }
   throw err;
 };
@@ -123,7 +139,7 @@ const loadPage = (pageUrl, dirName) => {
     .then(links => downloadAssets(links, host, assetsDirPath))
     .then(() => log.info('All files downloded succsessfully!'))
     .then(() => `Download is done ${pageUrl} to ${rootDir}`)
-    .catch(err => handleError(err));
+    .catch(err => nahdleAndThrowError(err));
 };
 
 export default loadPage;

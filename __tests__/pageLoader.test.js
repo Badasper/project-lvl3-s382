@@ -63,7 +63,7 @@ beforeEach(() => {
 
 describe('Read data from nock server', () => {
   it('#Read raw body', async () => {
-    const outDirName = await fs.mkdtemp(path.join(os.tmpdir(), 'page-hexlet-'));
+    const outDirName = await fs.mkdtemp(path.join(os.tmpdir(), 'page-hexlet-2-'));
     const indexFilePath = path.resolve(outDirName, 'hexlet-io-courses.html');
     await loadPage(pageUrl, outDirName);
     const data = await fs.readFile(indexFilePath, 'utf-8');
@@ -101,6 +101,10 @@ describe('Disk operations errors', () => {
 describe('Http errors', () => {
   it('#Bad url', async () => {
     await expect(loadPage('/undefined')).rejects.toThrowErrorMatchingSnapshot();
+  });
+
+  it('#Blanc url', async () => {
+    await expect(loadPage()).rejects.toThrowErrorMatchingSnapshot();
   });
 
   it('#404 response', async () => {

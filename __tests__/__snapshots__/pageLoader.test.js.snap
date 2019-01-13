@@ -4,6 +4,8 @@ exports[`Disk operations errors #Permission denied 1`] = `"Loading fail: Permiss
 
 exports[`Disk operations errors #Undefined output directory 1`] = `"Loading fail: Cannot find output dir, please check output dir --output dirToDownload"`;
 
-exports[`Http errors #404 response 1`] = `"Loading fail: Unreachable url 404"`;
+exports[`Http errors #404 response 1`] = `"Loading fail: Unreachable url: 404"`;
 
 exports[`Http errors #Bad url 1`] = `"Loading fail: Bad url for download"`;
+
+exports[`Http errors #Blanc url 1`] = `"Cannot read property 'replace' of null"`;
