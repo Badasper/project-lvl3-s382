@@ -19,7 +19,7 @@ or
 ```bash
 mkdir page-loader
 cd page-loader
-git clone https://github.com/Badasper/project-lvl3-s382 .
+git clone https://github.com/Badasper/project-lvl3-s382
 make install
 npm link
 ```
@@ -44,7 +44,7 @@ DEBUG mode:
 DEBUG=page-loader* --output /home/download/web https://hexlet.io/courses
 ```
 
-### Asciinema
+## Asciinema
 
 [demo install page-loader](https://asciinema.org/a/Xsj2vwzz9wI3b3NMfTlMXOGtf
 )
